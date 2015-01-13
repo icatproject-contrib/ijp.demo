@@ -1,9 +1,14 @@
 # Configuration for IJP sample job scripts
 
-# Locations for jobtypes and scripts - remove whichever is not relevant on the current system. At least one of these must be defined.
+# Locations for jobtypes and scripts - remove whichever is not relevant on the current system. At least one of these must be defined:
+#   - to install jobtype XML files in the IJP, define 'glassfish' and 'port'
+#   - to install job scripts, define ijp.scripts.dir
 
-# Location for IJP jobtypes (if current system hosts an IJP server)
-ijp.jobtypes.dir=/home/br54/glassfish4/glassfish/domains/domain1/config/ijp/job_types
+# Glassfish home, must contain "glassfish/domains"
+glassfish=/home/br54/glassfish4
+
+# Glassfish admin port (normally 4848)
+port=4848
 
 # Location on batch server for job scripts (if current system is an IJP batch server)
 ijp.scripts.dir=/opt/ijp/bin
