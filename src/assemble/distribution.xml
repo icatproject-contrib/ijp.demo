@@ -7,19 +7,19 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <outputDirectory>ijp_batch_scripts</outputDirectory>
+            <outputDirectory>ijp.demojobs</outputDirectory>
             <directory>${basedir}/src/main/resources</directory>
         </fileSet>
         <fileSet>
-            <outputDirectory>ijp_batch_scripts</outputDirectory>
+            <outputDirectory>ijp.demojobs</outputDirectory>
             <directory>${basedir}/src/main/config</directory>
         </fileSet>
         <fileSet>
-            <outputDirectory>ijp_batch_scripts</outputDirectory>
+            <outputDirectory>ijp.demojobs</outputDirectory>
             <directory>${basedir}/src/main/scripts</directory>
         </fileSet>
         <fileSet>
-            <outputDirectory>ijp_batch_scripts</outputDirectory>
+            <outputDirectory>ijp.demojobs</outputDirectory>
             <directory>${basedir}</directory>
             <filtered>true</filtered>
             <includes>
@@ -31,7 +31,7 @@
 
     <dependencySets>
         <dependencySet>
-            <outputDirectory>ijp_batch_scripts</outputDirectory>
+            <outputDirectory>ijp.demojobs</outputDirectory>
             <useTransitiveDependencies>false</useTransitiveDependencies>
             <unpack>true</unpack>
             <unpackOptions>
