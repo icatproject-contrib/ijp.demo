@@ -41,7 +41,7 @@ def substProps( filename, propsList ):
 
 actions, options, arg = getActions()
 
-prop_name = "ijp.batch.scripts.properties"
+prop_name = "demojobs.properties"
 optional_prop_list = ["ijp.jobtypes.dir", "ijp.scripts.dir"]
 mandatory_prop_list = ["facility.name","data.format.name","data.format.version","dataset.type.1","dataset.type.2"]
 # Properties to replace in jobtype files

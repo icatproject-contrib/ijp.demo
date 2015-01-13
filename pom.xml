@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.icatproject</groupId>
   <artifactId>ijp.demojobs</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>IJP Demo Jobs</name>
   <packaging>pom</packaging>
 
@@ -26,9 +26,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:http://icat-job-portal.googlecode.com/svn/ijp.batch.scripts/trunk</connection>
-        <developerConnection>scm:svn:https://icat-job-portal.googlecode.com/svn/ijp.batch.scripts/trunk</developerConnection>
-        <url>http://code.google.com/p/icat-job-portal/source/browse/#svn%2Fijp.batch.scripts%2Ftrunk</url>
+        <connection>scm:svn:http://icat-job-portal.googlecode.com/svn/demojobs/trunk</connection>
+        <developerConnection>scm:svn:https://icat-job-portal.googlecode.com/svn/demojobs/trunk</developerConnection>
+        <url>http://code.google.com/p/icat-job-portal/source/browse/#svn%2Fdemojobs%2Ftrunk</url>
     </scm>
 
     <repositories>

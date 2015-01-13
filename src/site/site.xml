@@ -4,7 +4,7 @@
   <body>
   
     <breadcrumbs>
-      <item name="IJP Job Scripts" href="index.html"/>
+      <item name="IJP Demo Job Scripts" href="index.html"/>
     </breadcrumbs>
 
     <menu name="Information for Users">    
@@ -14,7 +14,7 @@
     </menu>
        
     <menu name="Information for Installers">
-      <item name="IJP Job Scripts Installation" href="installation.html"/>
+      <item name="IJP Demo Job Scripts Installation" href="installation.html"/>
     </menu>
     
     <menu ref="reports"/>

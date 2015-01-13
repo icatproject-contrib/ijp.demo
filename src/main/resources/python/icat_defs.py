@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Names of ICAT entities used in the job scripts
-# Expressions of form ${...} will be replaced from values in ijp.batch.scripts.properties during installation.
+# Expressions of form ${...} will be replaced from values in demojobs.properties during installation.
 # Change these to match your ICAT instance
 
 # Facility Name - used in create_datafile, copy_datafile

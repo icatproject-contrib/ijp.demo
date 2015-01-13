@@ -2,7 +2,7 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
-        <title>IJP Sample Job Scripts Installation</title>
+        <title>IJP Demo Job Scripts Installation</title>
     </properties>
 
     <body>
@@ -10,7 +10,7 @@
         <section name="Installation">
 
             <subsection name="Compatibility">
-                The IJP Sample Job Scripts will work with an IJP version of 2.0.0 or greater.
+                The IJP Demo Job Scripts will work with an IJP version of 2.0.0 or greater.
             </subsection>
 
             <subsection name="Prerequisites">
@@ -56,7 +56,7 @@
                         <a href="http://code.google.com/p/icatproject/wiki/Installation"> the generic installation instructions</a>
                     </li>
                     <li> 
-                        Update the ijp.batch.scripts.properties file with target locations for jobtype descriptions and batch scripts.
+                        Update the demojobs.properties file with target locations for jobtype descriptions and batch scripts.
                         The scripts must be installed on the batch server. The jobtypes must be installed in the IJP.  When the
                         IJP and batch server are separate systems, the installation must be performed once on each, with only the
                         jobtypes location defined for the IJP server, and only the scripts location defined for the batch server.
@@ -76,7 +76,7 @@
                 </ol>
             </subsection>
 
-            <subsection name="The ijp.batch.scripts.properties file">
+            <subsection name="The demojobs.properties file">
 
                 <dl>
                     <dt>ijp.jobtypes.dir</dt>
