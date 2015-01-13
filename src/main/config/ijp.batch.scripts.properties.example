@@ -1,0 +1,22 @@
+# Configuration for IJP sample job scripts
+
+# Locations for jobtypes and scripts - remove whichever is not relevant on the current system. At least one of these must be defined.
+
+# Location for IJP jobtypes (if current system hosts an IJP server)
+ijp.jobtypes.dir=/home/br54/glassfish4/glassfish/domains/domain1/config/ijp/job_types
+
+# Location on batch server for job scripts (if current system is an IJP batch server)
+ijp.scripts.dir=/opt/ijp/bin
+
+# DatasetType 1 - used in most job types; must exist in ICAT
+dataset.type.1=TestDatasetType
+
+# DatasetType 2 - used in some job types; must exist in ICAT
+dataset.type.2=TestDatasetType2
+
+# Facility name (used by copy/create datafile jobs): must exist in ICAT
+facility.name=TestFacility
+
+# Data format and version (used by create_datafile): must exist in ICAT
+data.format.name=TestDataFormat
+data.format.version=0.1

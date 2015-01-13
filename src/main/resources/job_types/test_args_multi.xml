@@ -1,0 +1,11 @@
+<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'>
+    <name>test_args_multi</name>
+    <!--
+        Run the test_args script, single run for all supplied datasets/datafiles
+    -->
+    <executable>test_args.py</executable>
+    <multiple>true</multiple>
+    <type>batch</type>
+    <datasetTypes>${dataset.type.1}</datasetTypes>
+    <!-- test_args.py supports option-{one,two}; but we don't have to make them available here -->
+</jobType>

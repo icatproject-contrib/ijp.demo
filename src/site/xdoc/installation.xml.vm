@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>IJP Sample Job Scripts Installation</title>
+    </properties>
+
+    <body>
+
+        <section name="Installation">
+
+            <subsection name="Compatibility">
+                The IJP Sample Job Scripts will work with an IJP version of 2.0.0 or greater.
+            </subsection>
+
+            <subsection name="Prerequisites">
+
+                <ul>
+                    <li>
+                      An ICAT Job Portal (server) installation, from which jobs can be submitted.  This could be on the batch server itself
+                      (e.g. when using unixbatch) or could be remote.
+                    </li>
+                    <li>
+                       A local IJP batch server.  The sample unixbatch server may be useful for local development and testing.
+                    </li>
+                    <li>
+                      The IJP server should be configured to submit jobs to the batch server. When testing, the IJP should be configured
+                      with <i>only</i> this batch server, so it is guaranteed to "choose" to submit jobs to it.
+                    </li>
+                    <li>
+                      The batch server should be configured to receive jobs from the IJP server.
+                    </li>
+                    <li>
+                        Python (version 2.4 to 2.7) installed on the batch server.
+                    </li>
+                    <li>
+                        <code>sleepcount</code> is a bash script, so requires <code>bash</code> on the batch server.
+                    </li>
+                    <li>
+                      An IDS client installed on the batch server.
+                    </li>
+                    <li>
+                      An ICAT client installed on the batch server.
+                    </li>
+                </ul>
+            </subsection>
+
+            <subsection name="Summary of steps">
+                <ol>
+                    <li>
+                        Note that when the IJP server and batch server are separate systems, the installation must be performed
+                        on both.
+                    </li>
+                    <li>
+                        Please follow
+                        <a href="http://code.google.com/p/icatproject/wiki/Installation"> the generic installation instructions</a>
+                    </li>
+                    <li> 
+                        Update the ijp.batch.scripts.properties file with target locations for jobtype descriptions and batch scripts.
+                        The scripts must be installed on the batch server. The jobtypes must be installed in the IJP.  When the
+                        IJP and batch server are separate systems, the installation must be performed once on each, with only the
+                        jobtypes location defined for the IJP server, and only the scripts location defined for the batch server.
+                    </li>
+                    <li>
+                        Change the dataset types, facilty name and data format details in the properties file; the chosen values
+                        must be existing entities in the ICAT instance used by the IJP.  See below for more details.
+                    </li>
+                    <li>
+                      The batch scripts folder must be visible to the batch system userids that will be used to run jobs
+                      (it should be in their <code>PATH</code>).
+                      Current IJP batch servers use <code>sudo</code> to execute scripts; one consequence is that the scripts
+                      folder must also be permitted by the sudoers security policy (typically, it should be one of the values
+                      in <code>secure_path</code> in the <code>/etc/sudoers</code> file.)
+                    </li>
+                    <li>Check that it works.</li>
+                </ol>
+            </subsection>
+
+            <subsection name="The ijp.batch.scripts.properties file">
+
+                <dl>
+                    <dt>ijp.jobtypes.dir</dt>
+                    <dd>When installing on an IJP server, set this to the full path to the folder into which the jobtype descriptions should be placed,
+                      e.g. /home/ijp/glassfish4/glassfish/domains/domain1/config/ijp/job_types.  
+                      This property should be omitted when installing on a batch server that is not also an IJP server.
+                    </dd>
+                    
+                    <dt>ijp.scripts.dir</dt>
+                    <dd>When installing on a batch server, set this to the full path to the folder into which the job scripts should be placed for the batch server.
+                      e.g. /opt/ijp/bin.  
+                      This property should be omitted when installing on an IJP server that is not also a batch server.
+                    </dd>
+                    
+                    <dt>dataset.type.1</dt>
+                    <dd>Should be the name of an existing ICAT dataset type. Most of the jobtype descriptions refer to this.
+                    It is used to populate the list of available dataset types when the jobtype is selected in the IJP.
+                    The initial value is <code>TestDatasetType</code>.
+                    </dd>
+                    
+                    <dt>dataset.type.2</dt>
+                    <dd>Should be the name of an existing ICAT dataset type. Several of the jobtype descriptions refer to this
+                    (in addition to <code>dataset.type.1</code>).
+                    It is used to populate the list of available dataset types when the jobtype is selected in the IJP.
+                    The initial value is <code>TestDatasetType2</code>.
+                    </dd>
+                    
+                    <dt>facility.name</dt>
+                    <dd>Should be the name of an existing Facility in ICAT; it is used by the <code>create_datafile</code>
+                      and <code>copy_datafile</code> job scripts.
+                      The initial value is <code>TestFacility</code>.
+                    </dd>
+                    
+                    <dt>data.format.name</dt>
+                    <dd>Should be the name of an existing ICAT data format; it is used by the <code>create_datafile</code> job script.
+                      The initial value is <code>TestDataFormat</code>.
+                    </dd>
+                    
+                    <dt>data.format.version</dt>
+                    <dd>Corresponding version-string for <code>data.format.name</code>.
+                      The initial value is <code>0.1</code>.
+                    </dd>
+                    
+                </dl>
+
+            </subsection>
+
+            <subsection name="Check that the job scripts work">
+              <p>In a command shell on the batch server, go to the scripts installation directory (e.g. /opt/ijp/bin) and run:
+              </p>
+              <p>
+                <code>
+                  test_args.py --datasetIds=1,2,3 --datafileIds=4,5,6
+                </code>
+              </p>
+              <p>
+                This should succeed and report the supplied dataset/datafile IDs. (It will also report that other properties have
+                not been supplied, but this is OK.)
+              </p> 
+              <p>In a browser on any suitable system, launch the IJP by visiting https://ijp-server-name:8181/ijp 
+                (where ijp-server-name is the domain name of the IJP server), and login with the credentials defined in ijp.properties. Then:
+                <ul>
+                  <li>Choose "date" from the list of Job Types</li>
+                  <li>Click "Submit Job"; this should bring up a dialog "date Options" with buttons labelled Submit and Close.</li>
+                  <li>Click "Submit".  The resulting dialog should display a single Submitted Job ID. Note the ID, and click Close.</li>
+                  <li>Click on "Show job status panel"; this should launch a separate dialog listing known jobs and their statuses.</li>
+                  <li>At or near the top of the list should be an entry for the noted ID, with name "date".  If the Status is Queued,
+                      wait until it changes to Completed.  Once Completed, click Display Job Output.</li>
+                  <li>The output display should show that the job has run; at or near the end should be a line that ends with
+                      "date ending with code 0".</li>
+                </ul>
+              </p> 
+              <p>Repeat for other job types, to test other aspects of the IJP, e.gs:
+                <dl>
+                  <dt>sleepcount</dt>
+                      <dd>Asks for sleep duration and no. of iterations. It should be possible to observe the output before the job completes.</dd>
+                      
+                  <dt>test_args_multi</dt>
+                      <dd>Allows the user to select multiple datasets and datafiles and submit them either to a single job, or one job per selection.
+                          Output reports the IDs of the selected datasets/datafiles.
+                      </dd>
+                      
+                  <dt>create_datafile</dt>
+                      <dd>Allows the user to select one or more datasets; requests a filename and (one-line) contents.
+                          For each selected dataset, runs a (separate) job that creates the file in that dataset.
+                      </dd>
+                      
+                  <dt>copy_datafile</dt>
+                     <dd>The user should select a single target dataset and a single datafile (in a different dataset).
+                         The job will create a copy of the datafile in the target dataset.
+                         Note that the IJP allows selection of multiple datasets and/or datafiles, and allows the user to run
+                         multiple jobs; but in these cases the jobs will fail.  Only a single dataset and a single datafile
+                         (in a different dataset) should be selected.
+                     </dd>
+                </dl>
+              </p>
+            </subsection>
+
+        </section>
+    </body>
+</document>
+			

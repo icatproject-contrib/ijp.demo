@@ -1,0 +1,28 @@
+<jobType>
+    <!-- 
+        Sleepcount demo script. Iterate a chosen number of times, with sleeps of a chosen duration.
+        Takes no dataset or datafiles (it is "job-only"), and does not require the ICAT session ID
+        or connection details.
+        The main reason for this script is to demonstrate:
+          (a) an example of specifying job options for the IJP
+          (b) the ability (if the batch server supports it) to view job output during execution
+    -->
+    <name>sleepcount</name>
+    <executable>sleepcount.bash</executable>
+    <type>batch</type>
+    <jobOptions>
+      <name>Count</name>
+      <type>enumeration</type>
+      <programParameter>--count</programParameter>
+      <values>5</values>
+      <values>10</values>
+    </jobOptions>
+    <jobOptions>
+      <name>Sleep Time</name>
+      <type>enumeration</type>
+      <programParameter>--sleep</programParameter>
+      <values>30</values>
+      <values>60</values>
+      <values>180</values>
+    </jobOptions>
+</jobType>

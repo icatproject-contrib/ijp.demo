@@ -1,0 +1,117 @@
+#!/usr/bin/env python
+from setup_utils import *
+import os
+import fileinput
+
+# ijp.batch.scripts
+
+manifest_name = "installed_files.txt"
+
+def uninstall(preInstall=False):
+    # We could remove precisely those jobtypes / scripts that are defined here,
+    # but should not remove any others added by other means;
+    # and since the set of jobtypes here might change over time, we'd have to record the names of those we install.
+    # Might do that in future; for now, uninstall is a no-op.
+    if os.path.exists(manifest_name):
+        mf = open(manifest_name)
+        for line in mf:
+            line = line.strip()
+            if actions.verbosity:
+                print "Removing " + line
+            os.remove(os.path.normpath(line))
+        mf.close()
+        os.remove(manifest_name)
+    else:
+      if actions.verbosity:
+          print "No manifest found for any previous installation, assuming nothing to uninstall."
+      if preInstall:
+          print "Any existing jobtypes/scripts of the same names will be overwritten."
+      else:
+          print "Any existing Jobtypes/scripts will not be removed from their respective installation folders; must be uninstalled manually."
+
+def substProps( filename, propsList ):
+    """
+    Replace refs to ${prop_name} in file with props[prop_name].
+    """
+    for line in fileinput.input( filename,inplace=True):
+        for prop in propsList:
+            line = line.replace( "${"+prop+"}", props[prop])
+        # This adds an extra space to the end of the line, but for now we don't care!
+        print line,
+
+actions, options, arg = getActions()
+
+prop_name = "ijp.batch.scripts.properties"
+optional_prop_list = ["ijp.jobtypes.dir", "ijp.scripts.dir"]
+mandatory_prop_list = ["facility.name","data.format.name","data.format.version","dataset.type.1","dataset.type.2"]
+# Properties to replace in jobtype files
+jobtype_props = ["dataset.type.1","dataset.type.2"]
+# Properties to replace in the icat_defs.py script
+script_props = ["facility.name","data.format.name","data.format.version"]
+
+if arg in ["CONFIGURE", "INSTALL"]:
+    # Neither of the properties in optional_prop_list are mandatory...
+    actions.configure(prop_name,mandatory_prop_list,".")
+    props = actions.getProperties(prop_name, mandatory_prop_list)
+    # ... but at least one of them must be set
+    if (not props['ijp.jobtypes.dir']) and (not props['ijp.scripts.dir']):
+        abort("At least one of ijp.jobtypes.dir or ijp.scripts.dir must be specified in " + prop_name)
+    actions.checkNoErrors()
+    
+if arg == "INSTALL":   
+    
+    mf = None
+    
+    try:
+        uninstall(preInstall=True)
+        
+        mf = open(manifest_name,'w')
+        
+        # if ijp.jobtypes.dir is defined, copy jobtypes/*.xml to there
+        if props['ijp.jobtypes.dir']:
+            jobtypes_dir = os.path.normpath(props['ijp.jobtypes.dir'])
+            for file in glob.glob("job_types/*.xml"):
+                shutil.copy(file,jobtypes_dir)
+                file = os.path.basename(file)
+                mf.write(os.path.join(jobtypes_dir,file)+'\n')
+                if actions.verbosity:
+                    print "Added " + file + " to " + jobtypes_dir
+                # Substitute dataset types, if any
+                if actions.verbosity:
+                    print "Replacing any dataset type references in " + file
+                substProps(os.path.join(jobtypes_dir,file),jobtype_props)
+                
+        # if ijp.scripts.dir is defined, copy {bash,python}/* to there
+        if props['ijp.scripts.dir']:
+            scripts_dir = os.path.normpath(props['ijp.scripts.dir'])
+            for file in glob.glob("bash/*"):
+                shutil.copy(file,scripts_dir)
+                mf.write(os.path.join(scripts_dir,os.path.basename(file))+'\n')
+                if actions.verbosity:
+                    print "Added " + file + " to " + scripts_dir
+            for file in glob.glob("python/*"):
+                shutil.copy(file,scripts_dir)
+                mf.write(os.path.join(scripts_dir,os.path.basename(file))+'\n')
+                if actions.verbosity:
+                    print "Added " + file + " to " + scripts_dir
+            # Substitute facility and data format in icat_defs.py
+            try:
+                if actions.verbosity:
+                    print "Replacing property references in icat_defs.py..."
+                substProps(os.path.join(props['ijp.scripts.dir'],"icat_defs.py"),script_props)
+            except Exception, e:
+                abort(str(e))
+        
+        mf.close()
+                    
+    except Exception, e:
+        if mf:
+            mf.close()
+        abort(str(e))
+               
+if arg == "UNINSTALL":
+    
+    try:
+        uninstall()
+    except Exception, e:
+        abort(str(e))       

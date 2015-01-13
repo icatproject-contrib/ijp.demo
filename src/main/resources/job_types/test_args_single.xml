@@ -1,0 +1,20 @@
+<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'>
+    <name>test_args_single</name>
+    <!--
+        Run the test_args script, one run per dataset/datafile
+    -->
+    <executable>test_args.py</executable>
+    <type>batch</type>
+    <datasetTypes>${dataset.type.1}</datasetTypes>
+    <!-- test_args.py supports option-{one,two}; we don't have to use them here -->
+    <jobOptions>
+      <name>Option 1</name>
+      <type>string</type>
+      <programParameter>--option-one</programParameter>
+    </jobOptions>
+    <jobOptions>
+      <name>Option 2</name>
+      <type>string</type>
+      <programParameter>--option-two</programParameter>
+    </jobOptions>
+</jobType>
