@@ -1,4 +1,4 @@
-<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'>
+<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true' acceptsDatasets='true'>
     <name>create_datafile</name>
     <!--
         Create a new datafile in the given dataset.

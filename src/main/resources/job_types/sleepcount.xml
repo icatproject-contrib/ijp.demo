@@ -21,6 +21,7 @@
       <name>Sleep Time</name>
       <type>enumeration</type>
       <programParameter>--sleep</programParameter>
+      <values>15</values>
       <values>30</values>
       <values>60</values>
       <values>180</values>
