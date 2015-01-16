@@ -1,6 +1,6 @@
 <jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'
     acceptsDatasets='true' acceptsDatafiles='true'>
-    <name>test_args_single</name>
+    <name>Test args - single dataset or datafile</name>
     <!--
         Run the test_args script, one run per dataset/datafile
     -->

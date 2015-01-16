@@ -1,6 +1,6 @@
 <jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'
     acceptsDatasets='true' acceptsDatafiles='false'>
-    <name>test_args_sets_only</name>
+    <name>Test args - datasets only</name>
     <!--
         Run the test_args script, allows single run for all supplied datasets.
         Does not accept datafiles - IJP should not allow their selection.

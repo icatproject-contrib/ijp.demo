@@ -1,5 +1,5 @@
 <jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true' acceptsDatasets='true'>
-    <name>create_datafile</name>
+    <name>Create datafile</name>
     <!--
         Create a new datafile in the given dataset.
         Can be applied to datasets of type TestDatasetType.

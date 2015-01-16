@@ -7,7 +7,7 @@
           (a) an example of specifying job options for the IJP
           (b) the ability (if the batch server supports it) to view job output during execution
     -->
-    <name>sleepcount</name>
+    <name>Sleepcount</name>
     <executable>sleepcount.bash</executable>
     <type>batch</type>
     <jobOptions>
