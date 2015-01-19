@@ -75,7 +75,7 @@ if not options.datasetIds:
 # Check that it's only a single ID, not a list
 
 if len(options.datasetIds.split(',')) > 1:
-    terminate(jobName + ': expects a single datasetId, not a list: ' + options.datasetIds)
+    terminate(jobName + ': expects a single datasetId, not a list: ' + options.datasetIds,1)
 
 # Similarly for the datafileIds
 
@@ -85,7 +85,7 @@ if not options.datafileIds:
 # Check that it's only a single ID, not a list
 
 if len(options.datafileIds.split(',')) > 1:
-    terminate(jobName + ': expects a single datafileId, not a list: ' + options.datafileIds)
+    terminate(jobName + ': expects a single datafileId, not a list: ' + options.datafileIds,1)
 
 targetDatasetId = int(options.datasetIds)
 # Keep datafileId as str for now

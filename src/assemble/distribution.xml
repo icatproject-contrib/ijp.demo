@@ -7,16 +7,37 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <outputDirectory>ijp.demojobs</outputDirectory>
-            <directory>${basedir}/src/main/resources</directory>
+            <outputDirectory>ijp.demojobs/bash</outputDirectory>
+            <directory>${basedir}/src/main/resources/bash</directory>
+            <!-- ensure all scripts are executable and have unix line-endings -->
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>ijp.demojobs/python</outputDirectory>
+            <directory>${basedir}/src/main/resources/python</directory>
+            <!-- ensure all scripts are executable and have unix line-endings -->
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>ijp.demojobs/job_types</outputDirectory>
+            <directory>${basedir}/src/main/resources/job_types</directory>
+            <!-- ensure all files have unix line-endings -->
+            <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
             <outputDirectory>ijp.demojobs</outputDirectory>
             <directory>${basedir}/src/main/config</directory>
+            <!-- ensure all files have unix line-endings -->
+            <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
             <outputDirectory>ijp.demojobs</outputDirectory>
             <directory>${basedir}/src/main/scripts</directory>
+            <!-- ensure all scripts are executable and have unix line-endings -->
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
             <outputDirectory>ijp.demojobs</outputDirectory>
@@ -25,6 +46,8 @@
             <includes>
                 <include>*.txt</include>
             </includes>
+            <!-- ensure all files have unix line-endings -->
+            <lineEnding>unix</lineEnding>
         </fileSet>
     </fileSets>
 
