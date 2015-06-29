@@ -7,40 +7,40 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <outputDirectory>ijp.demojobs/bash</outputDirectory>
+            <outputDirectory>ijp.demo/bash</outputDirectory>
             <directory>${basedir}/src/main/resources/bash</directory>
             <!-- ensure all scripts are executable and have unix line-endings -->
             <fileMode>0755</fileMode>
             <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
-            <outputDirectory>ijp.demojobs/python</outputDirectory>
+            <outputDirectory>ijp.demo/python</outputDirectory>
             <directory>${basedir}/src/main/resources/python</directory>
             <!-- ensure all scripts are executable and have unix line-endings -->
             <fileMode>0755</fileMode>
             <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
-            <outputDirectory>ijp.demojobs/job_types</outputDirectory>
+            <outputDirectory>ijp.demo/job_types</outputDirectory>
             <directory>${basedir}/src/main/resources/job_types</directory>
             <!-- ensure all files have unix line-endings -->
             <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
-            <outputDirectory>ijp.demojobs</outputDirectory>
+            <outputDirectory>ijp.demo</outputDirectory>
             <directory>${basedir}/src/main/config</directory>
             <!-- ensure all files have unix line-endings -->
             <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
-            <outputDirectory>ijp.demojobs</outputDirectory>
+            <outputDirectory>ijp.demo</outputDirectory>
             <directory>${basedir}/src/main/scripts</directory>
             <!-- ensure all scripts are executable and have unix line-endings -->
             <fileMode>0755</fileMode>
             <lineEnding>unix</lineEnding>
         </fileSet>
         <fileSet>
-            <outputDirectory>ijp.demojobs</outputDirectory>
+            <outputDirectory>ijp.demo</outputDirectory>
             <directory>${basedir}</directory>
             <filtered>true</filtered>
             <includes>
@@ -54,7 +54,7 @@
 
     <dependencySets>
         <dependencySet>
-            <outputDirectory>ijp.demojobs</outputDirectory>
+            <outputDirectory>ijp.demo</outputDirectory>
             <useTransitiveDependencies>false</useTransitiveDependencies>
             <unpack>true</unpack>
             <unpackOptions>

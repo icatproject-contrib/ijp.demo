@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.icatproject</groupId>
-  <artifactId>ijp.demojobs</artifactId>
+  <artifactId>ijp.demo</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>IJP Demo Jobs</name>
   <packaging>pom</packaging>
@@ -12,7 +12,7 @@
         <downloadUrl>http://www.icatproject.org/mvn/repo</downloadUrl>
          <site>
             <id>website</id>
-            <url>scp://www.icatproject.org/var/www/html/mvn/site/ijp/demojobs/${project.version}</url>
+            <url>scp://www.icatproject.org/var/www/html/mvn/site/ijp/demo/${project.version}</url>
         </site>
         <repository>
             <id>repo</id>
@@ -26,9 +26,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:svn:http://icat-job-portal.googlecode.com/svn/demojobs/trunk</connection>
-        <developerConnection>scm:svn:https://icat-job-portal.googlecode.com/svn/demojobs/trunk</developerConnection>
-        <url>http://code.google.com/p/icat-job-portal/source/browse/#svn%2Fdemojobs%2Ftrunk</url>
+        <connection>scm:svn:http://icat-job-portal.googlecode.com/svn/demo/trunk</connection>
+        <developerConnection>scm:svn:https://icat-job-portal.googlecode.com/svn/demo/trunk</developerConnection>
+        <url>http://code.google.com/p/icat-job-portal/source/browse/#svn%2Fdemo%2Ftrunk</url>
     </scm>
 
     <repositories>

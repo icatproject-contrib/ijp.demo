@@ -17,7 +17,7 @@
 
                 <ul>
                     <li>The IJP Demo Scripts distribution: 
-                      <a href="${repoUrl}/org/icatproject/ijp.demojobs/${project.version}/ijp.demojobs-${project.version}-distro.zip">ijp.demojobs-${project.version}-distro.zip</a>
+                      <a href="${repoUrl}/org/icatproject/ijp.demo/${project.version}/ijp.demo-${project.version}-distro.zip">ijp.demo-${project.version}-distro.zip</a>
                     </li>
                     <li>
                       An ICAT Job Portal (server) installation, from which jobs can be submitted.  This could be on the batch server itself
