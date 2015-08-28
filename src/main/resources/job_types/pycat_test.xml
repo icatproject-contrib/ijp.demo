@@ -1,0 +1,13 @@
+<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'>
+    <!-- 
+      A simple batch job that reports the ICAT and IDS versions
+      It requires no datasets, and has no options.
+    -->
+    <name>python-icat tests</name>
+    <executable>pycat_test.py</executable>
+    <type>batch</type>
+    <!-- Job-only jobs can explicitly use "none (job only)" as their datasetType,
+         but it is OK to omit the element completely 
+    <datasetTypes>none (job only)</datasetTypes>
+    -->
+</jobType>

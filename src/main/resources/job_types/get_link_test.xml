@@ -1,0 +1,14 @@
+<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'
+    acceptsDatasets='false' acceptsDatafiles='true'>
+    <name>getLink Test</name>
+    <!--
+        Show the path returned by IDS getLink() for each datafile
+        Expects: one or more datafileIds
+        Options: (none)
+        Requires sessionId, ICAT and IDS server URLs to be supplied by IJP.
+    -->
+    <executable>get_link_test.py</executable>
+    <multiple>true</multiple>
+    <type>batch</type>
+    <datasetTypes>${dataset.type.1}</datasetTypes>
+</jobType>
