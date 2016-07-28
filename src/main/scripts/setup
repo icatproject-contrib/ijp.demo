@@ -18,7 +18,12 @@ def uninstall(preInstall=False):
             line = line.strip()
             if actions.verbosity:
                 print "Removing " + line
-            os.remove(os.path.normpath(line))
+            try:
+                os.remove(os.path.normpath(line))
+            except Exception, e:
+                if actions.verbosity:
+                    # File has probably been removed by something else - fine by us
+                    print "Exception " + str(e) + " when trying to remove " + line + "; will ignore."
         mf.close()
         os.remove(manifest_name)
     else:
