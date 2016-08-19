@@ -37,6 +37,9 @@
                         Python (version 2.4 to 2.7) installed on the batch server.
                     </li>
                     <li>
+                        Several jobscripts require Python-ICAT to be installed on the batch server.
+                    </li>
+                    <li>
                         <code>sleepcount</code> is a bash script, so requires <code>bash</code> on the batch server.
                     </li>
                     <li>
@@ -61,7 +64,9 @@
                     <li> 
                         Update the demojobs.properties file with target locations for jobtype descriptions and batch scripts.
                         The scripts must be installed on the batch server. The jobtypes must be installed in the IJP configuration
-                        in the glassfish domain.  
+                        in the glassfish domain.  Note that reinstallation of the IJP server will normally overwrite the
+                        configuration (including jobtypes) in glassfish with the contents of the installation, so the IJP demo
+                        jobtypes must be reinstalled separately afterwards.
                         When the IJP and batch server are separate systems, the installation must be performed once on each, with only the
                         glassfish location and admin port defined for the IJP server, and only the scripts location defined for the batch server.
                     </li>
@@ -74,7 +79,8 @@
                     </li>
                     <li>
                       The batch scripts folder must be visible to the batch system userids that will be used to run jobs
-                      (it should be in their <code>PATH</code>).
+                      (it should be in their <code>PATH</code>). If this is not possible, then change the executable in each
+                      jobtype to use the full path.
                       Current IJP batch servers use <code>sudo</code> to execute scripts; one consequence is that the scripts
                       folder must also be permitted by the sudoers security policy (typically, it should be one of the values
                       in <code>secure_path</code> in the <code>/etc/sudoers</code> file.)
@@ -141,7 +147,7 @@
               </p>
               <p>
                 <code>
-                  test_args.py --datasetIds=1,2,3 --datafileIds=4,5,6
+                  ./test_args.py --datasetIds=1,2,3 --datafileIds=4,5,6
                 </code>
               </p>
               <p>

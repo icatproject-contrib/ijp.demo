@@ -6,6 +6,15 @@
     </properties>
 
     <body>
+        <section name="1.0.1">
+            <ul>
+            <li>Added scripts that use python-icat</li>
+            <li>Added script demonstrating more of the job option types</li>
+            <li>Added demo of use of IDS preparedData</li>
+            <li>Change setup to cope with missing files in its manifest</li>
+            <li>Removed forward-slash from jobtype names (can cause problems in REST calls)</li>
+            </ul>
+        </section>
         <section name="1.0.0">
             <p>Initial release.</p>
         </section>
