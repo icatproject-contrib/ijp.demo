@@ -36,7 +36,7 @@
         at most one can be selected (zero is possible). So a group collects a set
         of mutually-exclusive command-line options.
         In this case, we assume that the executable's command line can include a
-        single option of the form --mode=someValue, where someValue can be
+        single option of the form mode=someValue, where someValue can be
         verbose or effusive (or other values not used/supported here).
     -->
     <jobOptions>
@@ -79,7 +79,7 @@
         (in which case the option should be omitted from the parameters
         passed to the batch submission).
         If a nonblank value is selected, then a parameter of the
-        form --viewtype=someValue will be added to the job submission.
+        form viewtype=someValue will be added to the job submission.
      -->
     <jobOptions>
         <name>View Type</name>
