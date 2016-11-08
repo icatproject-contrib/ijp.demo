@@ -1,0 +1,128 @@
+<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'
+    acceptsDatasets='true' acceptsDatafiles='true'>
+    <name>Test Options</name>
+    <!--
+        Runs the test_args script, permitting a single run for all supplied datasets/datafiles
+        (though the IJP GUI will still allow users to submit separate jobs for each dataset/datafile).
+        This version offers/exercises all the options supported by test_args.py,
+        covering each of the option types: string, string-with-default, boolean group,
+        boolean solo, enumeration, integer and float.
+    -->
+    <executable>test_args.py</executable>
+    <multiple>true</multiple>
+    <type>batch</type>
+    <datasetTypes>${dataset.type.1}</datasetTypes>
+    <datasetTypes>${dataset.type.2}</datasetTypes>
+    <jobOptions>
+      <name>Option 1</name>
+      <type>string</type>
+      <programParameter>--option-one</programParameter>
+    </jobOptions>
+    <jobOptions>
+      <name>Option 2</name>
+      <type>string</type>
+      <programParameter>--option-two</programParameter>
+      <!-- NOTE: the IJP server does nothing with the defaultValue.
+        The intention is that it should reflect any default value
+        that will be used by the corresponding executable if this
+        option is not set (e.g. if the user does not supply an explicit value).
+       -->
+      <defaultValue>Default for option 2</defaultValue>
+      <tip>Option 2 should have an initial default value</tip>
+    </jobOptions>
+    <!-- Mode options group.
+        Multiple jobOptions, each of type boolean, with the same groupName (Mode).
+        The GUI should offer this to the user as a set of radio buttons, of which
+        at most one can be selected (zero is possible). So a group collects a set
+        of mutually-exclusive command-line options.
+        In this case, we assume that the executable's command line can include a
+        single option of the form mode=someValue, where someValue can be
+        verbose or effusive (or other values not used/supported here).
+    -->
+    <jobOptions>
+        <groupName>Mode</groupName>
+		<type>boolean</type>
+		<name>plain</name>
+		<!-- Note that programParameter here is blank.
+		  If the user selects this option, then nothing will be added to the job submission parameters.
+		  Therefore it is essential that this choice should reflect the executable's behaviour when
+		  none of the other programParameter values are supplied.
+		 -->
+		<programParameter></programParameter>
+    </jobOptions>
+    <jobOptions>
+        <groupName>Mode</groupName>
+		<type>boolean</type>
+		<name>verbose</name>
+		<programParameter>--mode=verbose</programParameter>
+    </jobOptions>
+    <jobOptions>
+        <groupName>Mode</groupName>
+		<type>boolean</type>
+		<name>effusive</name>
+		<programParameter>--mode=effusive</programParameter>
+    </jobOptions>
+    <!-- Standalone (non-group) boolean option. 
+      Should be presented to the user as a checkbox.
+    -->
+    <jobOptions>
+		<name>silent</name>
+		<type>boolean</type>
+		<!-- Note that if we use a long-form parameter name, we must also provide '=true' -->
+		<programParameter>--silent=true</programParameter>
+		<tip>If set, shuts up regardless of Mode</tip>
+    </jobOptions>
+    <!-- enumeration option
+        This will normally be presented to the user as a selection list.
+        The intention is that only one value can be selected.
+        Initially, the first value is selected; but this can be blank
+        (in which case the option should be omitted from the parameters
+        passed to the batch submission).
+        If a nonblank value is selected, then a parameter of the
+        form viewtype=someValue will be added to the job submission.
+     -->
+    <jobOptions>
+        <name>View Type</name>
+        <type>enumeration</type>
+        <programParameter>--viewtype</programParameter>
+        <values></values>
+        <values>fullframe</values>
+		<values>fullframe-overlay</values>
+		<values>beads beads-fullframe</values>
+		<values>beads-fullframe-overlay</values>
+		<values>flats</values>
+		<values>flats-fullframe</values>
+		<values>flats-fullframe-overlay</values>
+		<values>whitelights</values>
+		<values>whitelights-fullframe</values>
+		<values>whitelights-fullframe-overlay</values>
+		<values>darks darks-fullframe</values>
+		<values>biases</values>
+		<values>biases-fullframe</values>
+		<tip>View Type: enumeration with many options, including blank</tip>
+    </jobOptions>
+    <!-- integer option 
+      The GUI should use any min/maxValue to constrain/check user input
+    -->
+    <jobOptions>
+    	<name>index</name>
+    	<type>integer</type>
+    	<programParameter>--index</programParameter>
+    	<defaultValue>1</defaultValue>
+    	<minValue>0</minValue>
+    	<maxValue>10</maxValue>
+    	<tip>Initial index</tip>
+  	</jobOptions>
+    <!-- float option 
+      The GUI should use any min/maxValue to constrain/check user input
+    -->
+  	<jobOptions>
+    	<name>origin</name>
+    	<type>float</type>
+    	<programParameter>--origin</programParameter>
+    	<defaultValue>0.0</defaultValue>
+    	<minValue>-2.0</minValue>
+    	<maxValue>2.0</maxValue>
+    	<tip>Origin in range [-2.0,2.0]</tip>
+  	</jobOptions>
+</jobType>

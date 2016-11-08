@@ -1,6 +1,6 @@
 <jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'
     acceptsDatasets='true' acceptsDatafiles='true'>
-    <name>Test args - multiple datasets/files</name>
+    <name>Test args - multiple datasets or datafiles</name>
     <!--
         Run the test_args script, single run for all supplied datasets/datafiles
     -->

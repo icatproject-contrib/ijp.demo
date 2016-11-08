@@ -1,0 +1,15 @@
+<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'
+    acceptsDatasets='true' acceptsDatafiles='false'>
+    <name>GetDatasetsTest</name>
+    <!--
+        Jobscript demonstrates use of getPreparedData;
+        reports when a datafile was not in the cache; reports size of resulting zipfile.
+        Expects: one or more datasetIds
+        Options: (none)
+        Requires sessionId, ICAT and IDS server URLs to be supplied by IJP.
+    -->
+    <executable>get_datasets_test.py</executable>
+    <multiple>true</multiple>
+    <type>batch</type>
+    <datasetTypes>${dataset.type.1}</datasetTypes>
+</jobType>
