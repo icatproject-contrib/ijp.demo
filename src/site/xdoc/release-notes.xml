@@ -15,6 +15,7 @@
             <li>Change setup to cope with missing files in its manifest</li>
             <li>Removed forward-slash from jobtype names (can cause problems in REST calls)</li>
             <li>Added optional executable path for jobtypes in configuration</li>
+            <li>Added optional second location to copy jobtypes</li>
             </ul>
         </section>
         <section name="1.0.0">
