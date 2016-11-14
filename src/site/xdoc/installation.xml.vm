@@ -73,6 +73,10 @@
                         When the IJP and batch server are separate systems, the installation must be performed once on each, with only the
                         glassfish location and admin port defined for the IJP server, and only the scripts location defined for the batch server.
                     </li>
+                    <li>Normally, when the IJP server is redeployed, it will replace any jobtypes installed in glassfish
+                        with those specified in its own configuration. To overcome this and preserve the demo jobtypes,
+                        set <code>ijp.jobtypes.dir.2</code> in the properties with the path to the IJP server installation.
+                    </li>
                     <li>
                         Change the dataset types, facilty name and data format details in the properties file; the chosen values
                         must be existing entities in the ICAT instance used by the IJP.  See below for more details.
@@ -109,6 +113,12 @@
                     <dt>executable.path</dt>
                     <dd>Optional. If the scripts will be installed in a folder that is not on the batch system user's PATH,
                       then set this value to the absolute path for this folder. The value must end with a <code>/</code>.
+                    </dd>
+                    
+                    <dt>ijp.jobtypes.dir.2</dt>
+                    <dd>Optional second location for the jobtype XML files. This can be used to add the jobtypes to
+                    the install folder of <code>ijp.server</code> (e.g. <code>/home/dmf/install/ijp.server/ijp/job_types</code>.
+                    Redeploying the IJP server would otherwise replace the demo jobtypes in the glassfish configuration.
                     </dd>
                     
                     <dt>ijp.scripts.dir</dt>

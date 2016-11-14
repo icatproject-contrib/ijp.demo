@@ -47,7 +47,7 @@ def substProps( filename, propsList ):
 actions, options, arg = getActions()
 
 prop_name = "demojobs.properties"
-optional_prop_list = ['glassfish','port', 'ijp.scripts.dir','executable.path']
+optional_prop_list = ['glassfish','port', 'ijp.scripts.dir','executable.path','ijp.jobtypes.dir.2']
 mandatory_prop_list = ["facility.name","data.format.name","data.format.version","dataset.type.1","dataset.type.2"]
 # Properties to replace in jobtype files
 jobtype_props = ["dataset.type.1","dataset.type.2","executable.path"]
@@ -85,14 +85,22 @@ if arg == "INSTALL":
             jobtypes_dir = os.path.join(actions.config_path,'ijp/job_types')
             for file in glob.glob("job_types/*.xml"):
                 shutil.copy(file,jobtypes_dir)
-                file = os.path.basename(file)
-                mf.write(os.path.join(jobtypes_dir,file)+'\n')
+                filename = os.path.basename(file)
+                mf.write(os.path.join(jobtypes_dir,filename)+'\n')
                 if actions.verbosity:
-                    print "Added " + file + " to " + jobtypes_dir
+                    print "Added " + filename + " to " + jobtypes_dir
                 # Substitute dataset types, if any
                 if actions.verbosity:
-                    print "Replacing any dataset type references in " + file
-                substProps(os.path.join(jobtypes_dir,file),jobtype_props)
+                    print "Replacing any dataset type references in " + filename
+                substProps(os.path.join(jobtypes_dir,filename),jobtype_props)
+                # If a second location is specified, copy the file to there as well
+                if 'ijp.jobtypes.dir.2' in props:
+                    jobtypesDir2 = props['ijp.jobtypes.dir.2']
+                    if actions.verbosity:
+                        print "Copying jobtype " + filename + " to " + jobtypesDir2
+                    file2 = os.path.join(jobtypesDir2,filename)
+                    shutil.copy(os.path.join(jobtypes_dir,filename),file2)
+                    mf.write(file2 + '\n')
                 
         # if ijp.scripts.dir is defined, copy {bash,python}/* to there
         if 'ijp.scripts.dir' in props:
