@@ -8,7 +8,7 @@
           (b) the ability (if the batch server supports it) to view job output during execution
     -->
     <name>Sleepcount</name>
-    <executable>sleepcount.bash</executable>
+    <executable>${executable.path}sleepcount.bash</executable>
     <type>batch</type>
     <jobOptions>
       <name>Count</name>

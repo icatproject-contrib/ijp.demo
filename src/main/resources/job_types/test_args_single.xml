@@ -4,7 +4,7 @@
     <!--
         Run the test_args script, one run per dataset/datafile
     -->
-    <executable>test_args.py</executable>
+    <executable>${executable.path}test_args.py</executable>
     <type>batch</type>
     <datasetTypes>${dataset.type.1}</datasetTypes>
     <!-- test_args.py supports option-{one,two}; we don't have to use them here -->

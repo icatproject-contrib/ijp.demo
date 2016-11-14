@@ -47,10 +47,10 @@ def substProps( filename, propsList ):
 actions, options, arg = getActions()
 
 prop_name = "demojobs.properties"
-optional_prop_list = ['glassfish','port', "ijp.scripts.dir"]
+optional_prop_list = ['glassfish','port', 'ijp.scripts.dir','executable.path']
 mandatory_prop_list = ["facility.name","data.format.name","data.format.version","dataset.type.1","dataset.type.2"]
 # Properties to replace in jobtype files
-jobtype_props = ["dataset.type.1","dataset.type.2"]
+jobtype_props = ["dataset.type.1","dataset.type.2","executable.path"]
 # Properties to replace in the icat_defs.py script
 script_props = ["facility.name","data.format.name","data.format.version"]
 
@@ -59,11 +59,14 @@ if arg in ["CONFIGURE", "INSTALL"]:
     actions.configure(prop_name,mandatory_prop_list,".")
     props = actions.getProperties(prop_name, mandatory_prop_list)
     # ... but at least one of them must be set
-    if (not props['glassfish']) and (not props['ijp.scripts.dir']):
+    if (not 'glassfish' in props) and (not 'ijp.scripts.dir' in props):
         abort("At least one of glassfish or ijp.scripts.dir must be specified in " + prop_name)
     # and if glassfish is set, port must be set too
-    if props['glassfish'] and not props['port']:
+    if 'glassfish' in props and not 'port' in props:
         abort('Must specify port for glassfish')
+    # if executable.path is not set, set it to the empty string
+    if not 'executable.path' in props:
+        props['executable.path'] = ''
     actions.checkNoErrors()
     
 if arg == "INSTALL":   
@@ -76,7 +79,7 @@ if arg == "INSTALL":
         mf = open(manifest_name,'w')
         
         # if glassfish is defined, copy jobtypes/*.xml to domainN/config/ijp/job_types there
-        if props['glassfish']:
+        if 'glassfish' in props:
             # use getGlassfish() to set config_path
             actions.getGlassfish(prop_name,[])
             jobtypes_dir = os.path.join(actions.config_path,'ijp/job_types')
@@ -92,7 +95,7 @@ if arg == "INSTALL":
                 substProps(os.path.join(jobtypes_dir,file),jobtype_props)
                 
         # if ijp.scripts.dir is defined, copy {bash,python}/* to there
-        if props['ijp.scripts.dir']:
+        if 'ijp.scripts.dir' in props:
             scripts_dir = os.path.normpath(props['ijp.scripts.dir'])
             for file in glob.glob("bash/*"):
                 shutil.copy(file,scripts_dir)

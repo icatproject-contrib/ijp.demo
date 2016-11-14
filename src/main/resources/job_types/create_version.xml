@@ -12,7 +12,7 @@
         (For unixbatch, standard PATH for the batch command is very limited,
         so absolute paths may be simplest.)
     -->
-    <executable>create_version.py</executable>
+    <executable>${executable.path}create_version.py</executable>
     <type>batch</type>
     <datasetTypes>${dataset.type.1}</datasetTypes>
     <jobOptions>

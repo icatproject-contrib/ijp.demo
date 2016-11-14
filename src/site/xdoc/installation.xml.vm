@@ -40,6 +40,9 @@
                         Several jobscripts require Python-ICAT to be installed on the batch server.
                     </li>
                     <li>
+                        The <code>create_version</code> jobscript requires the python versioning API <code>vicat.py</code> to be present.
+                    </li>
+                    <li>
                         <code>sleepcount</code> is a bash script, so requires <code>bash</code> on the batch server.
                     </li>
                     <li>
@@ -79,8 +82,8 @@
                     </li>
                     <li>
                       The batch scripts folder must be visible to the batch system userids that will be used to run jobs
-                      (it should be in their <code>PATH</code>). If this is not possible, then change the executable in each
-                      jobtype to use the full path.
+                      (it should be in their <code>PATH</code>). If this is not possible, then set the <code>executable.path</code>
+                      property in <code>demojobs.properties</code> to the absolute path.  Note that it must end with a <code>/</code>.
                       Current IJP batch servers use <code>sudo</code> to execute scripts; one consequence is that the scripts
                       folder must also be permitted by the sudoers security policy (typically, it should be one of the values
                       in <code>secure_path</code> in the <code>/etc/sudoers</code> file.)
@@ -101,6 +104,11 @@
                     <dt>port</dt>
                     <dd>The admin port of the glassfish instance, e.g. 4848.
                       When the <code>glassfish</code> property is specified, this must be specified as well.
+                    </dd>
+                    
+                    <dt>executable.path</dt>
+                    <dd>Optional. If the scripts will be installed in a folder that is not on the batch system user's PATH,
+                      then set this value to the absolute path for this folder. The value must end with a <code>/</code>.
                     </dd>
                     
                     <dt>ijp.scripts.dir</dt>

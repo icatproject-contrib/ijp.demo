@@ -8,7 +8,7 @@
         Options: (none)
         Requires sessionId, ICAT and IDS server URLs to be supplied by IJP.
     -->
-    <executable>get_datasets_test.py</executable>
+    <executable>${executable.path}get_datasets_test.py</executable>
     <multiple>true</multiple>
     <type>batch</type>
     <datasetTypes>${dataset.type.1}</datasetTypes>
