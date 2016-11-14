@@ -3,12 +3,19 @@
 # Locations for jobtypes and scripts - remove whichever is not relevant on the current system. At least one of these must be defined:
 #   - to install jobtype XML files in the IJP, define 'glassfish' and 'port'
 #   - to install job scripts, define ijp.scripts.dir
+#
+# If ijp.scripts.dir is not on the batch system user's PATH, set executable.path to the same value (but with a trailing /)
 
 # Glassfish home, must contain "glassfish/domains"
 glassfish=/home/br54/glassfish4
 
 # Glassfish admin port (normally 4848)
 port=4848
+
+# Optional path to prefix job executables
+# MUST end with /
+# (Absolute paths may be needed for some batch systems)
+!executable.path=/opt/ijp/bin/
 
 # Location on batch server for job scripts (if current system is an IJP batch server)
 ijp.scripts.dir=/opt/ijp/bin

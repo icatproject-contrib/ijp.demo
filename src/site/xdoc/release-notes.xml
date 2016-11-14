@@ -11,8 +11,10 @@
             <li>Added scripts that use python-icat</li>
             <li>Added script demonstrating more of the job option types</li>
             <li>Added demo of use of IDS preparedData</li>
+            <li>Added script to create new version of a dataset</li>
             <li>Change setup to cope with missing files in its manifest</li>
             <li>Removed forward-slash from jobtype names (can cause problems in REST calls)</li>
+            <li>Added optional executable path for jobtypes in configuration</li>
             </ul>
         </section>
         <section name="1.0.0">

@@ -5,7 +5,7 @@
         Run the test_args script, allows single run for all supplied datasets.
         Does not accept datafiles - IJP should not allow their selection.
     -->
-    <executable>test_args.py</executable>
+    <executable>${executable.path}test_args.py</executable>
     <multiple>true</multiple>
     <type>batch</type>
     <datasetTypes>${dataset.type.1}</datasetTypes>

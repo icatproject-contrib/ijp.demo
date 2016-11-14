@@ -9,7 +9,7 @@
         Options: (none)
         Requires sessionId, ICAT and IDS server URLs to be supplied by IJP.
     -->
-    <executable>copy_datafile_by_link.py</executable>
+    <executable>${executable.path}copy_datafile_by_link.py</executable>
     <multiple>true</multiple>
     <type>batch</type>
     <datasetTypes>${dataset.type.1}</datasetTypes>
