@@ -204,6 +204,8 @@ class IjpOptionParser(OptionParser):
       --sessionId  - the ICAT session ID
       --icatUrl     - URL for the ICAT service
       --idsUrl      - URL for the IDS service
+      --ijpUrl      - URL for the IJP service
+      --ijpJobId    - the job ID used in IJP
       --datasetIds  - comma-separated list of dataset IDs
       --datafileIds - comma-separated list of datafile IDs
     The IJP will pass these options to job scripts if the job type
@@ -225,6 +227,10 @@ class IjpOptionParser(OptionParser):
                       help="ICAT url")
         self.add_option("--idsUrl", dest="idsUrl",
                       help="IDS url")
+        self.add_option("--ijpUrl", dest="ijpUrl",
+                      help="IJP url")
+        self.add_option("--ijpJobId", dest="ijpJobId",
+                      help="the job ID used in ijp")
         self.add_option("--datasetIds", dest="datasetIds",
                      help="comma-separated dataset IDs")
         self.add_option("--datafileIds", dest="datafileIds",
