@@ -1,0 +1,8 @@
+<jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'
+         acceptsDatasets='true' acceptsDatafiles='false'>
+    <name>Allow multiple jobs</name>
+    <multiple>true</multiple>
+    <executable>date</executable>
+    <type>batch</type>
+    <datasetTypes>${dataset.type.1}</datasetTypes>
+</jobType>
