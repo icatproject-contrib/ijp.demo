@@ -207,6 +207,15 @@
                          multiple jobs; but in these cases the jobs will fail.  Only a single dataset and a single datafile
                          (in a different dataset) should be selected.
                      </dd>
+                     
+                  <dt>test_provenance</dt>
+                     <dd>The user should select a single dataset; then in the options, choose a name for the
+                       output dataset (which must not exist). The job will create a new empty dataset with the
+                       given name and add a provenance record to ICAT that links the input dataset to the new dataset.
+                       The Job Details in the IJP should then include the provenance.
+                       This requires an IJP version that supports provenance linking (added Nov 2016).
+                       The jobscript assumes that ICAT contains a DatasetType called TestDatasetType and
+                       an Application with name ProvenanceTest and version 1.
                 </dl>
               </p>
             </subsection>
