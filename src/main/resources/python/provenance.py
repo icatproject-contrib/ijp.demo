@@ -91,3 +91,4 @@ arguments = "--datasetIds="+str(datasetId)+" --out-dataset-name="+datasetName
 provId = session.storeProvenance(application,arguments,ids=[input_dataset],ods=[dataset], ijpUrl=options.ijpUrl, ijpJobId=options.ijpJobId);
 
 print "Provenance record id = ", provId, " created in ICAT", " for job ", options.ijpJobId
+
