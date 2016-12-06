@@ -43,6 +43,9 @@
                         The <code>create_version</code> jobscript requires the python versioning API <code>vicat.py</code> to be present.
                     </li>
                     <li>
+                        The <code>provenance</code> jobscript requires an IJP version that supports provenance linking (added Nov 2016).
+                    </li>
+                    <li>
                         <code>sleepcount</code> is a bash script, so requires <code>bash</code> on the batch server.
                     </li>
                     <li>
@@ -63,6 +66,11 @@
                     <li>
                         Please follow
                         <a href="http://icatproject.org/installation/component/"> the generic installation instructions</a>
+                    </li>
+                    <li>
+                        Check the permissions of the unpacked folders. In some situations, the bash and python folders may
+                        have no permissions; if this happens then change to allow full access to the current user at least,
+                        e.g. <code>chmod 0755 bash python</code>.
                     </li>
                     <li> 
                         Update the demojobs.properties file with target locations for jobtype descriptions and batch scripts.
@@ -216,6 +224,7 @@
                        This requires an IJP version that supports provenance linking (added Nov 2016).
                        The jobscript assumes that ICAT contains a DatasetType called TestDatasetType and
                        an Application with name ProvenanceTest and version 1.
+                     </dd>
                 </dl>
               </p>
             </subsection>
