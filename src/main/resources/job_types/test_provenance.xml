@@ -2,9 +2,18 @@
     acceptsDatasets='true' acceptsDatafiles='true'>
     <name>Test provenance</name>
     <!--
-        Run the provenance.py script
+        Run the provenance.py script.
+        Takes a single dataset; creates a new (empty) dataset (with the name given by the option),
+        creates a provenance record in ICAT linking the input and new datasets,
+        and informs the IJP so that it should be able to show the provenance in the job details.
     -->
-    <executable>provenance.py</executable>
+    <executable>${executable.path}provenance.py</executable>
     <type>batch</type>
     <datasetTypes>${dataset.type.1}</datasetTypes>
+    <datasetTypes>${dataset.type.2}</datasetTypes>
+    <jobOptions>
+      <name>Output dataset name</name>
+      <type>string</type>
+      <programParameter>--out-dataset-name</programParameter>
+    </jobOptions>
 </jobType>
