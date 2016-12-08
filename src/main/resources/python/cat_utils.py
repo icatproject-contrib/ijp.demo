@@ -1,5 +1,6 @@
 import httplib
 import urlparse
+import requests
 import zipfile
 import StringIO
 from suds.client import Client
@@ -148,9 +149,10 @@ class Session():
              datafileModTime)       
         return dfid
             
-    def storeProvenance(self, application, arguments = None, ids=[], idf=[], ods=[], odf=[]):
+    def storeProvenance(self, application, arguments = None, ids=[], idf=[], ods=[], odf=[], ijpUrl = None, ijpJobId = None):
         """
-        record provenance information
+        record provenance information.
+        If ijpUrl and ijpJobId are supplied, link the IJP job to the provenance.
         """ 
         job = self.factory.create("job")
         
@@ -183,6 +185,13 @@ class Session():
         job.application = application
         job.arguments = arguments
         job.id = self.service.create(self.sessionId, job)
+        # If we know the IJP url and jobId, tell the IJP
+        if ijpUrl and ijpJobId:
+            url = ijpUrl + '/ijp/rest/jm/job/provenance/' + ijpJobId
+            payload = {'provenanceId': job.id, 'sessionId': self.sessionId}
+            requests.post(url, data=payload, verify=False)
+
+        return job.id
  
 class Tee(threading.Thread):
     
