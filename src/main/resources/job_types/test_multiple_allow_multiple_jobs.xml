@@ -2,7 +2,7 @@
          acceptsDatasets='true' acceptsDatafiles='false'>
     <name>Multiple datasets - Allow multiple jobs</name>
     <multiple>true</multiple>
-    <executable>date</executable>
+    <executable>${executable.path}test_args.py</executable>
     <type>batch</type>
     <datasetTypes>${dataset.type.1}</datasetTypes>
 </jobType>
