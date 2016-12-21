@@ -50,10 +50,15 @@ print jobName, "starting..."
 
 rest = args  
 
+# Options we don't want to report on twice:
+coveredOptions = []
+
 if options.sessionId:
     print "ICAT sessionId provided"
 else:
     print "No ICAT sessionId provided"
+
+coveredOptions.append('sessionId')
 
 # Report icat/ids URLs if present
 
@@ -62,29 +67,43 @@ if options.icatUrl:
 else:
     print "ICAT url not supplied"
 
+coveredOptions.append('icatUrl')
+
 if options.idsUrl:
     print "IDS url =", options.idsUrl
 else:
     print "IDS url not supplied"
+
+coveredOptions.append('idsUrl')
 
 if options.datasetIds:
     print "datasetIds = ", options.datasetIds
 else:
     print "datasetIds not supplied"
 
+coveredOptions.append('datasetIds')
+
 if options.datafileIds:
     print "datafileIds = ", options.datafileIds
 else:
     print "datafileIds not supplied"
 
+coveredOptions.append('datafileIds')
+
 if options.optionOne:
     print "Option 1 = ", options.optionOne
+
+coveredOptions.append('optionOne')
 
 if options.optionTwo:
     print "Option 2 = ", options.optionTwo
 
+coveredOptions.append('optionTwo')
+
 if options.mode:
     print "Mode = ", options.mode
+
+coveredOptions.append('mode')
 
 if options.silent:
     # Note: print the value of silent; we expect a boolean,
@@ -93,15 +112,32 @@ if options.silent:
 else:
     print "Silent = false"
     
+coveredOptions.append('silent')
+
 if options.viewtype:
     print "View type = ", options.viewtype
     
+coveredOptions.append('viewType')
+
 if options.index:
     print "Index = ", options.index
+
+coveredOptions.append('index')
 
 if options.origin:
     print "Origin = ", options.origin
 
-print "Other command-line arguments (if any): ", args
+coveredOptions.append('origin')
+
+# List all other non-empty options
+print "Other options (if any):"
+for opt, value in options.__dict__.items():
+    if value and (opt not in coveredOptions):
+        print "  ", opt, "=", value
+
+print "Other command-line arguments (if any): ",
+for arg in args:
+    print arg,
+print
 
 print jobName, "completed."
