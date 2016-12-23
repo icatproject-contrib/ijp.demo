@@ -20,6 +20,18 @@ usage = "usage: %prog options"
 
 parser = IjpOptionParser(usage)
 
+# Placeholder for any positional arguments
+# This is one place where early jobscripts may require modification.
+# If the jobscript does any processing of positional arguments, then
+# they have to be declared here. We could have added the declaration
+# to IjpOptionParser, but then future jobscripts would not be able to
+# take advantage of ArgumentParser to develop their own argument specs.
+# This would seem to be a bridge too far in trying to achieve backward
+# compatibility.
+
+parser.add_argument("args",nargs="*",
+                help="Positional (non-option) arguments")
+
 # Options specific to this script
 # Job Type specs can choose to use these, but can't invent their own
 # (parse_args() will throw an error for unknown options)
