@@ -18,6 +18,9 @@ logging.basicConfig(level=logging.CRITICAL)
 
 usage = "usage: %prog options"
 
+# This uses the "old" behaviour of IjpOptionParser,
+# for backward compatibility
+
 parser = IjpOptionParser(usage)
 
 # Options specific to this script
@@ -51,7 +54,10 @@ print jobName, "starting..."
 rest = args  
 
 # Options we don't want to report on twice:
-coveredOptions = []
+# (Including the positional args declared in IjpOptionParser for
+# backwards compatibility):
+
+coveredOptions = ['args']
 
 if options.sessionId:
     print "ICAT sessionId provided"
