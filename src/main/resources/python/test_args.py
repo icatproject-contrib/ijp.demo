@@ -18,19 +18,10 @@ logging.basicConfig(level=logging.CRITICAL)
 
 usage = "usage: %prog options"
 
+# This uses the "old" behaviour of IjpOptionParser,
+# for backward compatibility
+
 parser = IjpOptionParser(usage)
-
-# Placeholder for any positional arguments
-# This is one place where early jobscripts may require modification.
-# If the jobscript does any processing of positional arguments, then
-# they have to be declared here. We could have added the declaration
-# to IjpOptionParser, but then future jobscripts would not be able to
-# take advantage of ArgumentParser to develop their own argument specs.
-# This would seem to be a bridge too far in trying to achieve backward
-# compatibility.
-
-parser.add_argument("args",nargs="*",
-                help="Positional (non-option) arguments")
 
 # Options specific to this script
 # Job Type specs can choose to use these, but can't invent their own
@@ -63,7 +54,10 @@ print jobName, "starting..."
 rest = args  
 
 # Options we don't want to report on twice:
-coveredOptions = []
+# (Including the positional args declared in IjpOptionParser for
+# backwards compatibility):
+
+coveredOptions = ['args']
 
 if options.sessionId:
     print "ICAT sessionId provided"

@@ -222,17 +222,25 @@ class IjpOptionParser(ArgumentParser):
     match their names, e.g.:
 
       usage = "usage: %prog options"
-      parser = IjpOptionParser(usage)
-      (options,args) = parser.parse_args()
+      parser = IjpArgumentParser(usage)
+      options      = parser.parse_args()
       if options.datasetIds:
           datasetIdsList = options.datasetIds.split(',')
           ...
     Note: for compatibility with pre-existing jobscripts,
     this class is (still) called IjpOptionParser; and it
     provides a mapping from add_option to add_argument.
-    New scripts should use add_argument.
+    The constructor takes a flag, oldOptionsBehaviour,
+    defaulting to True.  When True, the parser will preserve
+    compatibility by adding an "args" declaration to manage
+    all positional arguments; and the value of 'args' is returned
+    separately by parse_args().
+    New scripts should use add_argument rather than add_option
+    (though the latter will still work); and set oldOptionsBehaviour=False.
+    This will allow them to take advantage of the benefits of
+    ArgumentParser over the deprecated OptionParser.
     """
-    def __init__(self,usage):
+    def __init__(self,usage,oldOptionsBehaviour=True):
         ArgumentParser.__init__(self,usage)
         self.add_argument("--sessionId", dest="sessionId",
                       help="ICAT session ID")
@@ -248,6 +256,10 @@ class IjpOptionParser(ArgumentParser):
                      help="comma-separated dataset IDs")
         self.add_argument("--datafileIds", dest="datafileIds",
                      help="comma-separated datafile IDs")
+        self.oldOptionsBehaviour = oldOptionsBehaviour
+        if oldOptionsBehaviour:
+            self.add_argument("args",nargs="*",
+                help="Positional (non-option) arguments")
     def add_option(self,*vargs,**kwargs):
       """
       Map existing add_option uses to add_argument
@@ -263,14 +275,17 @@ class IjpOptionParser(ArgumentParser):
       self.add_argument(*vargs,**kwargs)
     def parse_args(self,args=None, namespace=None):
         """
-        Return a pair (options,args) so pre-existing scripts
+        If oldOptionsBehaviour is requested (as it is by default),
+        return a pair (options,args) so pre-existing scripts
         will still work.  This is a fudge! The 'options' value
         will also contain the positional arguments; but old
-        scripts won't look at them.
-        New scripts will have to accept a paired result,
-        but can ignore the second value.
+        scripts won't (normally) look at them.
+        If oldOptionsBehaviour is disabled, return the single value
+        returned by ArgumentParser.
         """
         args = super(IjpOptionParser,self).parse_args(args,namespace)
+        if not self.oldOptionsBehaviour:
+            return args
         if 'args' in args:
             newArgs = args.args
         else:
