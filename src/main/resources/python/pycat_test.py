@@ -19,6 +19,8 @@ parser = argparse.ArgumentParser(description="Show ICAT and IDS versions.")
 parser.add_argument('--icatUrl', dest='icatUrl', help='ICAT url (https://host:port)')
 parser.add_argument('--idsUrl', dest='idsUrl', help='IDS url (https://host:port)')
 parser.add_argument('--sessionId', dest='sessionId', help='ICAT session ID')
+parser.add_argument('--ijpUrl', dest='ijpUrl', help='IJP url')
+parser.add_argument('--ijpJobId', dest='ijpJobId', help='IJP job id')
 
 args = parser.parse_args()
 
