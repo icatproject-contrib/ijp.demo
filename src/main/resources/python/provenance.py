@@ -10,11 +10,12 @@ from icat_defs import facilityName
 import requests
 
 # Hard-wired values that this script expects to exist in ICAT
-# - may need to be changed
+# APPLICATION should match the jobtype name
+# APPLICATION_VERSION should be "1.0"
 #
 DATASET_TYPE="TestDatasetType"
-APPLICATION="ProvenanceTest"
-APPLICATION_VERSION="1"
+APPLICATION="Test provenance"
+APPLICATION_VERSION="1.0"
 
 usage = "usage: %prog dataset_id options"
 parser = IjpOptionParser(usage)

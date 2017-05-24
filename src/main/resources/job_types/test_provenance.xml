@@ -1,5 +1,5 @@
 <jobType sessionId='true' icatUrlRequired='true' idsUrlRequired='true'
-    acceptsDatasets='true' acceptsDatafiles='true'>
+    acceptsDatasets='true' generatesProvenance='true'>
     <name>Test provenance</name>
     <!--
         Run the provenance.py script.
