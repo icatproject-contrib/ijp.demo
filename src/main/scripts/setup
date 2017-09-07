@@ -44,26 +44,23 @@ def substProps( filename, propsList ):
         # This adds an extra space to the end of the line, but for now we don't care!
         print line,
 
-actions, options, arg = getActions()
 
-prop_name = "demojobs.properties"
-optional_prop_list = ['glassfish','port', 'ijp.scripts.dir','executable.path','ijp.jobtypes.dir.2']
+prop_name = "setup.properties"
+# Note: setup_utils insists that container/home/secure/port should be set, though we may not use them
+optional_prop_list = ['container','home','secure','port', 'ijp.scripts.dir','executable.path','ijp.jobtypes.dir']
 mandatory_prop_list = ["facility.name","data.format.name","data.format.version","dataset.type.1","dataset.type.2"]
 # Properties to replace in jobtype files
 jobtype_props = ["dataset.type.1","dataset.type.2","executable.path"]
 # Properties to replace in the icat_defs.py script
 script_props = ["facility.name","data.format.name","data.format.version"]
 
+actions, arg, props = getActions( prop_name, mandatory_prop_list )
+
 if arg in ["CONFIGURE", "INSTALL"]:
-    # Neither of the properties 'glassfish' and 'ijp.scripts.dir'are mandatory...
-    actions.configure(prop_name,mandatory_prop_list,".")
-    props = actions.getProperties(prop_name, mandatory_prop_list)
+    # Check that at least one of the alternative option-sets is set
     # ... but at least one of them must be set
-    if (not 'glassfish' in props) and (not 'ijp.scripts.dir' in props):
-        abort("At least one of glassfish or ijp.scripts.dir must be specified in " + prop_name)
-    # and if glassfish is set, port must be set too
-    if 'glassfish' in props and not 'port' in props:
-        abort('Must specify port for glassfish')
+    if (not props['container'] == 'Glassfish') and (not 'ijp.scripts.dir' in props):
+        abort("At least one of Glassfish or ijp.scripts.dir must be specified in " + prop_name)
     # if executable.path is not set, set it to the empty string
     if not 'executable.path' in props:
         props['executable.path'] = ''
@@ -78,11 +75,18 @@ if arg == "INSTALL":
         
         mf = open(manifest_name,'w')
         
+        jobtypeDirs = []
+        if 'ijp.jobtypes.dir' in props:
+            jobtypeDirs.append(props['ijp.jobtypes.dir'])
+            
         # if glassfish is defined, copy jobtypes/*.xml to domainN/config/ijp/job_types there
-        if 'glassfish' in props:
-            # use getGlassfish() to set config_path
-            actions.getGlassfish(prop_name,[])
-            jobtypes_dir = os.path.join(actions.config_path,'ijp/job_types')
+        if 'container' in props and props['container'] == 'Glassfish':
+            # Get config_path from home and the domain
+            config_path = os.path.join(props["home"], "glassfish", "domains", actions.domain, "config")
+            jobtypes_dir = os.path.join(config_path,'ijp/job_types')
+            jobtypeDirs.append(jobtypes_dir)
+            
+        for jobtypes_dir in jobtypeDirs:
             for file in glob.glob("job_types/*.xml"):
                 shutil.copy(file,jobtypes_dir)
                 filename = os.path.basename(file)
@@ -93,14 +97,6 @@ if arg == "INSTALL":
                 if actions.verbosity:
                     print "Replacing any dataset type references in " + filename
                 substProps(os.path.join(jobtypes_dir,filename),jobtype_props)
-                # If a second location is specified, copy the file to there as well
-                if 'ijp.jobtypes.dir.2' in props:
-                    jobtypesDir2 = props['ijp.jobtypes.dir.2']
-                    if actions.verbosity:
-                        print "Copying jobtype " + filename + " to " + jobtypesDir2
-                    file2 = os.path.join(jobtypesDir2,filename)
-                    shutil.copy(os.path.join(jobtypes_dir,filename),file2)
-                    mf.write(file2 + '\n')
                 
         # if ijp.scripts.dir is defined, copy {bash,python}/* to there
         if 'ijp.scripts.dir' in props:

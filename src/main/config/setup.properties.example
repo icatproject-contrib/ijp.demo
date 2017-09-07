@@ -1,0 +1,38 @@
+# Configuration for IJP sample job scripts
+
+# Locations for jobtypes and scripts - remove whichever is not relevant on the current system. At least one of these must be defined:
+#   - to install jobtype XML files in the IJP, define Glassfish as the container, and set home, secure and port
+#   - ijp.jobtypes.dir can be set to copy the jobtypes to an alternative location (e.g. the ijp.server install folder)
+#   - to install job scripts, define ijp.scripts.dir
+#
+# If ijp.scripts.dir is not on the batch system user's PATH, set executable.path to the same value (but with a trailing /)
+
+# Glassfish configuration
+container      = Glassfish
+home           = /home/glassfish/glassfish4
+secure         = true
+port           = 4848
+
+# Optional path to prefix job executables
+# MUST end with /
+# (Absolute paths may be needed for some batch systems)
+!executable.path=/opt/ijp/bin/
+
+# Location on batch server for job type XML files (as alternative or in addition to Glassfish)
+ijp.jobtypes.dir=/home/glassfish/install/ijp.server/ijp/job_types
+
+# Location on batch server for job scripts (if current system is an IJP batch server)
+ijp.scripts.dir=/opt/ijp/bin
+
+# DatasetType 1 - used in most job types; must exist in ICAT
+dataset.type.1=TestDatasetType
+
+# DatasetType 2 - used in some job types; must exist in ICAT
+dataset.type.2=TestDatasetType2
+
+# Facility name (used by copy/create datafile jobs): must exist in ICAT
+facility.name=TestFacility
+
+# Data format and version (used by create_datafile): must exist in ICAT
+data.format.name=TestDataFormat
+data.format.version=0.1
