@@ -35,9 +35,12 @@ pycatArgs = ['--url=%s/ICATService/ICAT?wsdl' % (args.icatUrl,),
 # so we have to set needlogin=False
 # (otherwise python-icat's Config will expect auth/username/password)
 
-conf = icat.config.Config(needlogin=False, ids="optional").getconfig(pycatArgs)
-
-client = icat.Client(conf.url, **conf.client_kwargs)
+# Configuration process has changed from python-icat 0.12.0 to 0.13.0
+# Old version:
+# conf = icat.config.Config(needlogin=False, ids="optional").getconfig(pycatArgs)
+# client = icat.Client(conf.url, **conf.client_kwargs)
+# New version:
+client, conf = icat.config.Config(needlogin=False, ids="optional", args=pycatArgs).getconfig()
 
 # Set the sessionId directly from that supplied by the IJP
 # Note that python-icat should NOT log out on closure
